@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "vows tests/* --spec"
   },
   "dependencies": {
     "atlassian-connect-express": "^1.0.7",
@@ -25,6 +26,8 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
-    "pad": "^1.0.0"
+    "assert": "^1.3.0",
+    "pad": "^1.0.0",
+    "vows": "^0.8.1"
   }
 }
