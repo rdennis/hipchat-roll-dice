@@ -91,7 +91,7 @@
     // that to be honored here.
     "port": "$PORT",
     // This is the public URL to your production add-on.
-    "localBaseUrl": "https://hipchat-roll-dice-stage.herokuapp.com",
+    "localBaseUrl": "$PUBLIC_URL",
     "store": {
       // Let's use Redis as our default data store in prod
       "adapter": "redis",
