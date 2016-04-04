@@ -3,7 +3,8 @@
     "name": "Roll Dice",
     "description": "Role some dice with /roll command.",
     "links": {
-        "self": "{{localBaseUrl}}/atlassian-connect.json"
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "{{localBaseUrl}}"
     },
     "capabilities": {
         "hipchatApiConsumer": {
