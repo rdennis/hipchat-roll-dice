@@ -1,4 +1,4 @@
-# hipchat-roll-dice
+# hipchat-roll-dice [![Build Status](https://travis-ci.org/rdennis/hipchat-roll-dice.svg?branch=master)](https://travis-ci.org/rdennis/hipchat-roll-dice)
 A HipChat integration to roll dice.
 
 ## Usage
