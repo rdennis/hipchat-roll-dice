@@ -21,6 +21,8 @@ var hbs = require('express-hbs');
 var http = require('http');
 var path = require('path');
 var os = require('os');
+// get the package.json
+var pjson = require('./package.json');
 
 // Let's use Redis to store our data
 ac.store.register('redis', require('atlassian-connect-express-redis'));
@@ -45,6 +47,9 @@ var hipchat = require('atlassian-connect-express-hipchat')(addon, app);
 
 // The following settings applies to all environments
 app.set('port', port);
+
+// let routes access package.json
+app.set('package.json', pjson);
 
 // Configure the Handlebars view engine
 app.engine('hbs', hbs.express3({partialsDir: viewsDir}));

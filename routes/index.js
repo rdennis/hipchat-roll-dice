@@ -41,16 +41,25 @@ module.exports = function(app, addon) {
     app.post('/webhook',
         addon.authenticate(),
         function(req, res) {
+            var resultMessage,
+                messageOpts = {
+                    options: { notify: true, color: 'gray', format: 'text' }
+                };
             var message = req.body.item.message.message.replace('/roll', '');
-            var result = roll(message);
-            var resultMessage = result.message;
-            var messageOpts = {
-                options: {
-                    notify: true,
-                    color: (result.success ? 'gray' : 'red'),
-                    format: 'text'
-                }
-            };
+            if (versionCheck(message)) {
+                var pjson = req.app.get('package.json');
+                resultMessage = pjson.name + ' v' + pjson.version;
+            } else {
+                var result = roll(message);
+                resultMessage = result.message;
+                messageOpts = {
+                    options: {
+                        notify: true,
+                        color: (result.success ? 'gray' : 'red'),
+                        format: 'text'
+                    }
+                };
+            }
 
             hipchat.sendMessage(req.clientInfo, req.identity.roomId, resultMessage, messageOpts)
                 .then(function(data) {
@@ -58,6 +67,11 @@ module.exports = function(app, addon) {
                 });
         }
     );
+    
+    function versionCheck(message) {
+        var versionRegex = /\B\s*(-v|--version)\s*\b/gi;
+        return versionRegex.test(message);
+    }
 
     function roll(message) {
         try {
