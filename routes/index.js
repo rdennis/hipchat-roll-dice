@@ -46,9 +46,12 @@ module.exports = function (app, addon) {
   app.post('/roll',
     addon.authenticate(),
     function (req, res) {
+      addon.logger.info('/roll');
       var message = req.body.item.message;
       var messageText = message.message.substring(6); // remove '/roll '
       var input = messageText.trim();
+
+      addon.logger.info('  "' + messageText + '"');
 
       var response = '';
       var options = {
