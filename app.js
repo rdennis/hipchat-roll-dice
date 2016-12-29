@@ -6,7 +6,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
-var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 // You need to load `atlassian-connect-express` to use her godly powers
@@ -21,8 +20,6 @@ var hbs = require('express-hbs');
 var http = require('http');
 var path = require('path');
 var os = require('os');
-// get the package.json
-var pjson = require('./package.json');
 
 // Let's use Redis to store our data
 ac.store.register('redis', require('atlassian-connect-express-redis'));
@@ -48,9 +45,6 @@ var hipchat = require('atlassian-connect-express-hipchat')(addon, app);
 // The following settings applies to all environments
 app.set('port', port);
 
-// let routes access package.json
-app.set('package.json', pjson);
-
 // Configure the Handlebars view engine
 app.engine('hbs', hbs.express3({partialsDir: viewsDir}));
 app.set('view engine', 'hbs');
@@ -62,7 +56,6 @@ app.use(morgan(devEnv ? 'dev' : 'combined'));
 // Include request parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 // Gzip responses when appropriate
 app.use(compression());
 // Enable the ACE global middleware (populates res.locals with add-on related stuff)
@@ -82,8 +75,9 @@ routes(app, addon);
 
 // Boot the damn thing
 http.createServer(app).listen(port, function(){
-  console.log()
+  console.log();
   console.log('Add-on server running at '+ (addon.config.localBaseUrl()||('http://' + (os.hostname()) + ':' + port)));
+  if(devEnv) console.log('dev env');
   // Enables auto registration/de-registration of add-ons into a host in dev mode
   if (devEnv) addon.register();
 });

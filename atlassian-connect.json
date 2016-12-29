@@ -1,26 +1,37 @@
 {
-    "key": "hipchat-roll-dice",
-    "name": "Roll Dice",
-    "description": "Role some dice with /roll command.",
-    "links": {
-        "self": "{{localBaseUrl}}/atlassian-connect.json",
-        "homepage": "{{localBaseUrl}}"
+  "key": "hipchat-roll-dice",
+  "name": "Roll Dice",
+  "description": "Roll some dice!",
+  "vendor": {
+    "name": "Robert Dennis",
+    "url": "https://rdenn.is"
+  },
+  "links": {
+    "self": "{{localBaseUrl}}/atlassian-connect.json",
+    "homepage": "{{localBaseUrl}}"
+  },
+  "capabilities": {
+    "hipchatApiConsumer": {
+      "scopes": [
+        "send_notification",
+        "view_room"
+      ],
+      "avatar": {
+        "url": "{{localBaseUrl}}/img/logo.png",
+        "url@2x": "{{localBaseUrl}}/img/logo.png"
+      }
     },
-    "capabilities": {
-        "hipchatApiConsumer": {
-            "scopes": [
-                "send_notification"
-            ]
-        },
-        "installable": {
-            "callbackUrl": "{{localBaseUrl}}/installable"
-        },
-        "webhook": {
-            "name": "roll",
-            "url": "{{localBaseUrl}}/webhook",
-            "pattern": "^/roll( +.*)?$",
-            "event": "room_message",
-            "authentication": "jwt"
-        }
-    }
+    "installable": {
+      "callbackUrl": "{{localBaseUrl}}/installable"
+    },
+    "webhook": [
+      {
+        "url": "{{localBaseUrl}}/roll",
+        "pattern": "^/roll",
+        "event": "room_message",
+        "name": "roll",
+        "authentication": "jwt"
+      }
+    ]
+  }
 }
