@@ -71,7 +71,7 @@
         // },
         "store": {
             "adapter": "redis",
-            "url": "redis://localhost:6379"
+            "url": "$REDIS_URL"
         }
     },
     // This is the production add-on configuration, which is enabled by setting
