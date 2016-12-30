@@ -6,6 +6,10 @@
     "email": "rdennis.dev@gmail.com",
     "url": "https://rdenn.is"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rdennis/hipchat-roll-dice"
+  },
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
