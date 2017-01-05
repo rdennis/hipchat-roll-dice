@@ -57,6 +57,7 @@ module.exports = function (app, addon) {
       input = input.replace(mentionMatcher, '@$1');
 
       addon.logger.info('  "' + messageText + '"');
+      addon.logger.info('  "' + input + '"');
 
       var response = '';
       var options = {
