@@ -70,7 +70,7 @@ module.exports = function (app, addon) {
       if (input.length < 1 || input === '-h' || input === '--help' || input === '--usage') {
         response += usageText;
       } else {
-        if(verboseMatcher.test(input) !== null) {
+        if(verboseMatcher.test(input)) {
           verbose = true;
           input = input.replace(verboseMatcher, '').trim();
         }
