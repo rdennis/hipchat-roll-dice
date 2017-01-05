@@ -56,8 +56,8 @@ module.exports = function (app, addon) {
       // replace /@/ with @ for mentions
       input = input.replace(mentionMatcher, '@$1');
 
-      addon.logger.info('  "' + messageText + '"');
-      addon.logger.info('  "' + input + '"');
+      addon.logger.info('  message: "' + messageText + '"');
+      addon.logger.info('  input:   "' + input + '"');
 
       var response = '';
       var options = {
