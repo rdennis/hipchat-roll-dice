@@ -1,6 +1,8 @@
 var url = require('url');
 var DiceRoller = require('roll-dice');
 
+var mentionMatcher = /\/@\/([^|\]]+)/g;
+
 var usageText = 'Usage:' +
   '\n  /roll' +
   '\n  /roll d20' +
@@ -50,6 +52,9 @@ module.exports = function (app, addon) {
       var message = req.body.item.message;
       var messageText = message.message.substring(6); // remove '/roll '
       var input = messageText.trim();
+
+      // replace /@/ with @ for mentions
+      input = input.replace(mentionMatcher, '@$1');
 
       addon.logger.info('  "' + messageText + '"');
 
