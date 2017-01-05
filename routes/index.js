@@ -65,15 +65,9 @@ module.exports = function (app, addon) {
       };
 
       // todo: improve the way we check for usage flags
-      if (input === '-h' || input === '--help' || input === '--usage') {
+      if (input.length < 1 || input === '-h' || input === '--help' || input === '--usage') {
         response += usageText;
       } else {
-        // todo: make default configurable?
-        if (input.length < 1) {
-          input = 'd20';
-          response += 'Defaulted to "d20"\n';
-        }
-
         var diceRoller = new DiceRoller();
         var result = diceRoller.roll(input);
 
