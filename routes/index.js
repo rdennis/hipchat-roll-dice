@@ -87,7 +87,7 @@ module.exports = function (app, addon) {
           response += 'Rolled ' + result.result;
 
           if (verbose) {
-            response += '\nResult object:\n' + stringify(result, { maxLength: Infinity, indent: indent });
+            response += '\nResult object:\n' + stringify(result, { maxLength: Infinity, indent: 2 });
           }
         }
       }
