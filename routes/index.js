@@ -1,4 +1,5 @@
 var url = require('url');
+var stringify = require('json-stringify-pretty-compact');
 var DiceRoller = require('roll-dice');
 
 var mentionMatcher = /\/@\/([^|\]]+)/g;
@@ -70,7 +71,7 @@ module.exports = function (app, addon) {
       if (input.length < 1 || input === '-h' || input === '--help' || input === '--usage') {
         response += usageText;
       } else {
-        if(verboseMatcher.test(input)) {
+        if (verboseMatcher.test(input)) {
           verbose = true;
           input = input.replace(verboseMatcher, '').trim();
         }
@@ -85,8 +86,8 @@ module.exports = function (app, addon) {
         } else {
           response += 'Rolled ' + result.result;
 
-          if(verbose) {
-            response += '\nResult object:\n' + JSON.stringify(result, null, 2);
+          if (verbose) {
+            response += '\nResult object:\n' + stringify(result, { maxLength: Infinity });
           }
         }
       }
