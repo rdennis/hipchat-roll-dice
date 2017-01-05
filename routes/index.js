@@ -2,6 +2,7 @@ var url = require('url');
 var DiceRoller = require('roll-dice');
 
 var mentionMatcher = /\/@\/([^|\]]+)/g;
+var verboseMatcher = /(^--?v(?:erbose)?)|(--?v(?:erbose)?$)/g;
 
 var usageText = 'Usage:' +
   '\n  /roll d20' +
@@ -52,6 +53,7 @@ module.exports = function (app, addon) {
       var message = req.body.item.message;
       var messageText = message.message.substring(6); // remove '/roll '
       var input = messageText.trim();
+      var verbose = false;
 
       // replace /@/ with @ for mentions
       input = input.replace(mentionMatcher, '@$1');
@@ -68,6 +70,11 @@ module.exports = function (app, addon) {
       if (input.length < 1 || input === '-h' || input === '--help' || input === '--usage') {
         response += usageText;
       } else {
+        if(verboseMatcher.test(input) !== null) {
+          verbose = true;
+          input = input.replace(verboseMatcher, '').trim();
+        }
+
         var diceRoller = new DiceRoller();
         var result = diceRoller.roll(input);
 
@@ -77,6 +84,10 @@ module.exports = function (app, addon) {
           options.color = 'red';
         } else {
           response += 'Rolled ' + result.result;
+
+          if(verbose) {
+            response += '\n  Result object: ' + JSON.stringify(result);
+          }
         }
       }
 
