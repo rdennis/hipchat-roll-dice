@@ -4,9 +4,9 @@ var DiceRoller = require('roll-dice');
 var mentionMatcher = /\/@\/([^|\]]+)/g;
 
 var usageText = 'Usage:' +
-  '\n  /roll' +
   '\n  /roll d20' +
   '\n  /roll 2d8+2' +
+  '\n  /roll d%' +
   '\n  /roll [ thing one | thing two | thing three ]';
 
 // This is the heart of your HipChat Connect add-on. For more information,
