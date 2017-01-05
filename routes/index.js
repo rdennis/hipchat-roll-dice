@@ -86,7 +86,7 @@ module.exports = function (app, addon) {
           response += 'Rolled ' + result.result;
 
           if(verbose) {
-            response += '\n  Result object: ' + JSON.stringify(result, null, 2);
+            response += '\n  Result object:\n' + JSON.stringify(result, null, 2);
           }
         }
       }
